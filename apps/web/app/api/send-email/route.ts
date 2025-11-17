@@ -3,8 +3,6 @@ import { Resend } from 'resend';
 import { ContactEmail } from '@/components/email/contact-email';
 import { contactFormSchema } from '@/lib/validations';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -20,6 +18,18 @@ export async function POST(req: NextRequest) {
     }
 
     const validatedData = validationResult.data;
+
+    // Check if API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured');
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please contact the site administrator.' },
+        { status: 500 }
+      );
+    }
+
+    // Initialize Resend with API key
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
