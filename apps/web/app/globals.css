@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 37 23% 98%;
+    --foreground: 24 9% 12%;
+    --card: 37 23% 96%;
+    --card-foreground: 24 9% 12%;
+    --popover: 37 23% 98%;
+    --popover-foreground: 24 9% 12%;
+    --primary: 28 75% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 142 61% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 42 32% 92%;
+    --muted-foreground: 33 5% 40%;
+    --accent: 20 87% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 33 15% 88%;
+    --input: 33 15% 88%;
+    --ring: 28 75% 38%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 24 9% 8%;
+    --foreground: 37 23% 98%;
+    --card: 24 9% 10%;
+    --card-foreground: 37 23% 98%;
+    --popover: 24 9% 8%;
+    --popover-foreground: 37 23% 98%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 24 9% 12%;
+    --secondary: 142 61% 35%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 28 12% 20%;
+    --muted-foreground: 33 5% 70%;
+    --accent: 20 87% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 28 12% 20%;
+    --input: 28 12% 20%;
+    --ring: 38 92% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom woodcraft styles */
+.wood-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8935f' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: -18%;
+  background-image:
+    radial-gradient(circle at 10% 20%, hsl(var(--primary) / 0.25), transparent 60%),
+    radial-gradient(circle at 60% 0%, hsl(var(--secondary) / 0.2), transparent 55%),
+    radial-gradient(circle at 90% 60%, hsl(var(--accent) / 0.18), transparent 70%);
+  filter: blur(65px);
+  opacity: 0.85;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.5;
+  mask-image: radial-gradient(circle at 40% 40%, black, transparent 70%);
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background-image: radial-gradient(circle, hsl(var(--primary) / 0.15), transparent 70%);
+  filter: blur(12px);
+  opacity: 0.9;
+}
+
+.hero-spark {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 18px hsl(var(--primary) / 0.8);
+  opacity: 0.4;
+}
+
+.ambient-gradient {
+  position: absolute;
+  inset: -15%;
+  background-image:
+    radial-gradient(circle at 20% 20%, hsl(var(--primary) / 0.45), transparent 55%),
+    radial-gradient(circle at 80% 0%, hsl(var(--secondary) / 0.35), transparent 50%),
+    radial-gradient(circle at 50% 80%, hsl(var(--accent) / 0.25), transparent 60%);
+  filter: blur(80px);
+  opacity: 0.7;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      90deg,
+      hsl(var(--foreground) / 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      0deg,
+      hsl(var(--foreground) / 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 120px 120px;
+  mix-blend-mode: soft-light;
+  mask-image: radial-gradient(circle at center, black, transparent 70%);
+}
+
+.ambient-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='a' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23a)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/80;
+}
