@@ -97,7 +97,7 @@ export function Footer() {
             </Link>
             .
           </p>
-          <p className="text-xs">Built with Next.js and shadcn/ui</p>
+          <p className="text-xs">Built with ❤️by Darkart (https://www.linkedin.com/in/velislav-tsvetanov-48432b2b4/)</p>
         </div>
       </div>
     </footer>
