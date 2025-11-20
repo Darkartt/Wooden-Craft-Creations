@@ -245,3 +245,4 @@ All rights reserved © 2025 JKL Woodcrafts
 Built with ❤️ using Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui
 # Dummy commit to trigger deployment
 # Trigger deployment
+# Another trigger
