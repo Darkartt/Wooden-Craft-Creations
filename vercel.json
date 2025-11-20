@@ -4,5 +4,5 @@
   "outputDirectory": ".next",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "rootDirectory": "apps/web",
+  "rootDirectory": "apps/web"
 }
