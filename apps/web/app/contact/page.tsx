@@ -58,7 +58,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container px-4 py-24 md:px-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -89,7 +89,11 @@ export default function ContactPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-6"
+                suppressHydrationWarning
+              >
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name">

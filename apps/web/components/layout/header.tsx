@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container flex h-16 items-center justify-between px-4 md:px-8">
+      <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 md:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <span className="font-serif text-2xl font-bold text-primary">JKL</span>
@@ -66,7 +66,7 @@ export function Header() {
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="border-t bg-background md:hidden">
-          <div className="container space-y-1 px-4 py-4">
+          <div className="mx-auto w-full max-w-6xl space-y-1 px-4 py-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}

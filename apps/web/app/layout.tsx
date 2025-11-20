@@ -3,6 +3,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
+import { AmbientBackground } from '@/components/layout/ambient-background';
 
 export const metadata: Metadata = {
   title: {
@@ -59,9 +60,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <Providers>
-          <div className="relative flex min-h-screen flex-col">
+          <div className="relative flex min-h-screen flex-col overflow-hidden">
+            <AmbientBackground />
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,31 +11,36 @@ import { motion } from 'framer-motion';
 const featuredProjects = [
   {
     id: 1,
-    title: 'Custom Oak Dining Table',
-    category: 'Furniture',
-    description: 'A beautiful handcrafted dining table made from solid oak.',
-    image: '/projects/placeholder-1.jpg',
+    title: 'Heritage Wishing Well',
+    category: 'Outdoor',
+    description:
+      'Garden centrepiece with hidden access hatch, aged by hand for a lived-in finish.',
+    image: '/gallery/wishing-well-hero.jpg',
+    imageAlt: 'Handcrafted wooden wishing well in a garden',
   },
   {
     id: 2,
-    title: 'Decorative Wall Shelves',
-    category: 'Decorations',
-    description: 'Elegant floating shelves with natural wood grain finish.',
-    image: '/projects/placeholder-2.jpg',
+    title: 'Oak Collectors Cabinet',
+    category: 'Furniture',
+    description:
+      'Solid oak cabinet with LED-ready shelving for displaying treasured collections.',
+    image: '/gallery/oak-display-cabinet.jpg',
+    imageAlt: 'Tall oak display cabinet with glass doors',
   },
   {
     id: 3,
-    title: 'Garden Bench',
+    title: 'Timber Garden Pavilion',
     category: 'Outdoor',
-    description: 'Weather-resistant outdoor bench with classic design.',
-    image: '/projects/placeholder-3.jpg',
+    description: 'Freestanding shelter built to order with joinery-grade framing.',
+    image: '/gallery/timber-gazebo.jpg',
+    imageAlt: 'Timber garden pavilion under construction outdoors',
   },
 ];
 
 export function FeaturedProjects() {
   return (
     <section className="bg-muted/40 py-24">
-      <div className="container px-4 md:px-8">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,12 +65,18 @@ export function FeaturedProjects() {
             >
               <Card className="group overflow-hidden transition-all hover:shadow-lg">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-wood-400 to-wood-600">
-                    <span className="font-serif text-6xl font-bold text-white/20">
-                      {project.id}
-                    </span>
-                  </div>
-                  <div className="absolute right-4 top-4">
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
+                    #{project.id.toString().padStart(2, '0')}
+                  </span>
+                  <div className="pointer-events-none absolute right-4 top-4">
                     <Badge>{project.category}</Badge>
                   </div>
                 </div>

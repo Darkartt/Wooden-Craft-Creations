@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Lightbulb,
@@ -63,7 +64,7 @@ const tools = [
 
 export default function AboutPage() {
   return (
-    <div className="container px-4 py-24 md:px-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -84,10 +85,30 @@ export default function AboutPage() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="mb-24"
       >
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-8 aspect-[16/9] overflow-hidden rounded-lg bg-gradient-to-br from-wood-400 to-wood-600">
-            <div className="flex h-full items-center justify-center">
-              <Hammer className="h-24 w-24 text-white/30" />
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 grid gap-6 lg:grid-cols-[1.1fr_minmax(0,0.9fr)]">
+            <div className="rounded-xl bg-gradient-to-br from-wood-400 to-wood-600 p-8 text-white shadow-xl">
+              <div className="mb-6 inline-flex items-center gap-3 text-2xl font-semibold">
+                <Hammer className="h-8 w-8" />
+                Workshop Roots
+              </div>
+              <p className="text-lg text-white/90">
+                From small market stalls to bespoke commissions, Kev&apos;s workshop has grown with each
+                piece crafted by hand.
+              </p>
+            </div>
+            <div className="relative hidden overflow-hidden rounded-xl shadow-2xl lg:block">
+              <Image
+                src="/gallery/workshop-detail.jpg"
+                alt="Workbench with chisels, clamps, and freshly milled timber"
+                width={900}
+                height={700}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-background/90 p-3 text-sm">
+                <p className="font-medium text-foreground">Tools of the Trade</p>
+                <p className="text-muted-foreground">Every project is tuned by hand before it leaves the shop.</p>
+              </div>
             </div>
           </div>
 
