@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     description:
       'Beautiful handcrafted wooden furniture and decorative pieces by Kev Simmonds',
   },
+  icons: {
+    icon: '/favicon.jpg',
+  },
   robots: {
     index: true,
     follow: true,
