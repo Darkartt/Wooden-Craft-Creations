@@ -97,7 +97,7 @@ export function Footer() {
             </Link>
             .
           </p>
-          <p className="text-xs">Built with ❤️by Darkart (https://www.linkedin.com/in/velislav-tsvetanov-48432b2b4/)</p>
+          <p className="text-xs">Built with ❤️by <a href="https://www.linkedin.com/in/velislav-tsvetanov-48432b2b4/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Darkart</a></p>
         </div>
       </div>
     </footer>
