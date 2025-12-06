@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const featuredProjects = [
   {
@@ -41,7 +41,7 @@ export function FeaturedProjects() {
   return (
     <section className="bg-muted/40 py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -52,11 +52,11 @@ export function FeaturedProjects() {
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             A showcase of recent work demonstrating craftsmanship and attention to detail
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, index) => (
-            <motion.div
+            <m.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -85,11 +85,11 @@ export function FeaturedProjects() {
                   <p className="text-muted-foreground">{project.description}</p>
                 </CardContent>
               </Card>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -102,7 +102,7 @@ export function FeaturedProjects() {
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

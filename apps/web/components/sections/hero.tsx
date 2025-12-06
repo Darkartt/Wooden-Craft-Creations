@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Hammer } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const floatingOrbs = [
   {
@@ -43,7 +43,7 @@ export function Hero() {
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-gradient-to-b from-wood-100 to-background dark:from-wood-900/20 dark:to-background">
       {/* Animated light-mode background */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden dark:hidden">
-        <motion.div
+        <m.div
           aria-hidden
           className="hero-gradient"
           initial={{ scale: 0.95, opacity: 0 }}
@@ -51,7 +51,7 @@ export function Hero() {
           transition={{ duration: 1.5, ease: 'easeOut' }}
         />
 
-        <motion.div
+        <m.div
           aria-hidden
           className="hero-grid"
           animate={{ backgroundPositionX: ['0px', '80px'] }}
@@ -59,7 +59,7 @@ export function Hero() {
         />
 
         {floatingOrbs.map((orb, index) => (
-          <motion.div
+          <m.div
             key={index}
             aria-hidden
             className="hero-orb"
@@ -80,7 +80,7 @@ export function Hero() {
         ))}
 
         {sparkles.map((sparkle, index) => (
-          <motion.div
+          <m.div
             key={`sparkle-${index}`}
             aria-hidden
             className="hero-spark"
@@ -96,24 +96,24 @@ export function Hero() {
 
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_460px]">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
             {/* Icon */}
-            <motion.div
+            <m.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5, type: 'spring' }}
               className="mb-8 inline-flex items-center justify-center rounded-full bg-primary/10 p-4"
             >
               <Hammer className="h-12 w-12 text-primary" />
-            </motion.div>
+            </m.div>
 
             {/* Heading */}
-            <motion.h1
+            <m.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -121,10 +121,10 @@ export function Hero() {
             >
               Handcrafted Wooden Creations
               <span className="block text-primary">by Kev Simmonds</span>
-            </motion.h1>
+            </m.h1>
 
             {/* Subheading */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
@@ -132,10 +132,10 @@ export function Hero() {
             >
               Custom craftsmanship bringing your vision to life. From furniture to decorative
               pieces, each creation is built with passion, precision, and attention to detail.
-            </motion.p>
+            </m.p>
 
             {/* CTA Buttons */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -150,11 +150,11 @@ export function Hero() {
               <Button asChild variant="outline" size="lg">
                 <Link href="/contact">Get in Touch</Link>
               </Button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* Hero Imagery */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -175,7 +175,7 @@ export function Hero() {
                 Every commission starts with carefully selected timber and well-loved tools.
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 

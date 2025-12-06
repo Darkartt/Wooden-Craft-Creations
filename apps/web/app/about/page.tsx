@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   Lightbulb,
   Pencil,
@@ -66,7 +66,7 @@ export default function AboutPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
       {/* Header */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -76,10 +76,10 @@ export default function AboutPage() {
         <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
           Crafting wooden creations with passion, precision, and attention to detail
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Personal Story */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
@@ -130,12 +130,12 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       <Separator className="my-16" />
 
       {/* Craftsmanship Philosophy */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -161,12 +161,12 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       <Separator className="my-16" />
 
       {/* Process Timeline */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -184,7 +184,7 @@ export default function AboutPage() {
           {processSteps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
+              <m.div
                 key={step.number}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -205,16 +205,16 @@ export default function AboutPage() {
                     <p className="text-muted-foreground">{step.description}</p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
-      </motion.section>
+      </m.section>
 
       <Separator className="my-16" />
 
       {/* Tools & Materials */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -280,10 +280,10 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* CTA */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -300,7 +300,7 @@ export default function AboutPage() {
         >
           Get in Touch
         </a>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

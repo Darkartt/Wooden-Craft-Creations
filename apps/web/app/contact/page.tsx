@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Mail, Facebook, Linkedin, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -60,7 +60,7 @@ export default function ContactPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
       {/* Header */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -71,11 +71,11 @@ export default function ContactPage() {
           Have a project in mind? Let&apos;s discuss how we can bring your woodworking vision to
           life.
         </p>
-      </motion.div>
+      </m.div>
 
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-3">
         {/* Contact Form */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -220,10 +220,10 @@ export default function ContactPage() {
               </form>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
 
         {/* Contact Information */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -286,7 +286,7 @@ export default function ContactPage() {
               </p>
             </CardContent>
           </Card>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

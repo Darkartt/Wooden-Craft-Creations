@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 const orbs = [
   {
@@ -27,19 +27,42 @@ const orbs = [
 ];
 
 export function AmbientBackground() {
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const translateY = useTransform(scrollYProgress, [0, 1], [0, -160]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
+  // Respect prefers-reduced-motion for users who prefer less animation
+  if (prefersReducedMotion) {
+    return (
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div aria-hidden className="ambient-gradient" />
+        <div aria-hidden className="ambient-grid" style={{ opacity: 0.4 }} />
+        <div className="ambient-noise" aria-hidden />
+        {orbs.map((orb, index) => (
+          <div
+            key={index}
+            aria-hidden
+            className={`absolute rounded-full ${orb.className}`}
+            style={{
+              width: orb.size,
+              height: orb.size,
+            }}
+          />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      <motion.div
+      <m.div
         aria-hidden
         className="ambient-gradient"
         style={{ translateY, scale }}
       />
 
-      <motion.div
+      <m.div
         aria-hidden
         className="ambient-grid"
         animate={{ opacity: [0.35, 0.5, 0.35] }}
@@ -49,7 +72,7 @@ export function AmbientBackground() {
       <div className="ambient-noise" aria-hidden />
 
       {orbs.map((orb, index) => (
-        <motion.div
+        <m.div
           key={index}
           aria-hidden
           className={`absolute rounded-full ${orb.className}`}

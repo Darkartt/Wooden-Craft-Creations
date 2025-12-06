@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export function CTASection() {
   return (
     <section className="py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -24,13 +24,13 @@ export function CTASection() {
           </div>
 
           {/* Floating accents */}
-          <motion.div
+          <m.div
             aria-hidden
             className="absolute -left-10 top-10 hidden h-32 w-32 rounded-full bg-primary/20 blur-3xl sm:block"
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
-          <motion.div
+          <m.div
             aria-hidden
             className="absolute -right-10 bottom-10 hidden h-32 w-32 rounded-full bg-secondary/20 blur-3xl sm:block"
             animate={{ y: [0, 20, 0] }}
@@ -67,7 +67,7 @@ export function CTASection() {
             <span className="mx-4 h-3 w-3 rounded-full bg-primary/40" />
             <span className="h-px flex-1 bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,11 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, useMemo } from 'react';
+import { m, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+
+// Low-quality blur placeholder (10x7 wood-toned gradient)
+const blurDataURL =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAHAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgIBAwQDAAAAAAAAAAAAAQIDBAAFESEGEhMxQVFh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAwT/xAAaEQACAgMAAAAAAAAAAAAAAAABAgADESEx/9oADAMBAAIRAxEAPwDK9N6hnoUZKk0kU0L+N4JBuGBHwfY9Z7jGCaO4S2LEyOoqJ//Z';
 
 type Category = 'all' | 'furniture' | 'decorations' | 'custom' | 'outdoor';
 
@@ -209,15 +213,18 @@ export default function GalleryPage() {
     };
   }, [selectedProject]);
 
-  const filteredProjects =
-    selectedCategory === 'all'
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+  const filteredProjects = useMemo(
+    () =>
+      selectedCategory === 'all'
+        ? projects
+        : projects.filter((project) => project.category === selectedCategory),
+    [selectedCategory]
+  );
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-8">
       {/* Header */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -228,10 +235,10 @@ export default function GalleryPage() {
           Explore our collection of handcrafted wooden creations, from custom furniture to
           decorative pieces
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Filter Bar */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
@@ -247,46 +254,49 @@ export default function GalleryPage() {
             {category.label}
           </Button>
         ))}
-      </motion.div>
+      </m.div>
 
       {/* Projects Grid */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            layout
-          >
-            <Card className="group h-full overflow-hidden transition-all hover:shadow-lg hover:border-primary/50">
-              {/* Project Image */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                <button
-                  type="button"
-                  onClick={() => setSelectedProject(project)}
-                  className="group relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-                  aria-label={`Enlarge ${project.title}`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.imageAlt}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    priority={index < 3}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <p className="pointer-events-none absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-wide text-white/80">
-                    Click to enlarge
-                  </p>
-                  <div className="pointer-events-none absolute right-4 top-4">
-                    <Badge variant="secondary" className="capitalize">
-                      {project.category}
-                    </Badge>
-                  </div>
-                </button>
-              </div>
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, index) => (
+            <m.div
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Card className="group h-full overflow-hidden transition-all hover:shadow-lg hover:border-primary/50">
+                {/* Project Image */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProject(project)}
+                    className="group relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    aria-label={`Enlarge ${project.title}`}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading={index < 6 ? 'eager' : 'lazy'}
+                      placeholder="blur"
+                      blurDataURL={blurDataURL}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                    <p className="pointer-events-none absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-wide text-white/80">
+                      Click to enlarge
+                    </p>
+                    <div className="pointer-events-none absolute right-4 top-4">
+                      <Badge variant="secondary" className="capitalize">
+                        {project.category}
+                      </Badge>
+                    </div>
+                  </button>
+                </div>
 
               {/* Project Details */}
               <CardContent className="p-6">
@@ -308,13 +318,14 @@ export default function GalleryPage() {
                 )}
               </CardContent>
             </Card>
-          </motion.div>
+          </m.div>
         ))}
+        </AnimatePresence>
       </div>
 
       {/* Empty State */}
       {filteredProjects.length === 0 && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="py-24 text-center"
@@ -322,62 +333,67 @@ export default function GalleryPage() {
           <p className="text-lg text-muted-foreground">
             No projects found in this category. Check back soon!
           </p>
-        </motion.div>
+        </m.div>
       )}
 
-      {selectedProject && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${selectedProject.title} enlarged view`}
-          onClick={() => setSelectedProject(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.2 }}
-            className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-background"
-            onClick={(event) => event.stopPropagation()}
+      <AnimatePresence>
+        {selectedProject && (
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-8"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selectedProject.title} enlarged view`}
+            onClick={() => setSelectedProject(null)}
           >
-            <div className="relative aspect-[4/3] bg-muted">
-              <Image
-                src={selectedProject.image}
-                alt={selectedProject.imageAlt}
-                fill
-                sizes="(min-width: 1024px) 60vw, 100vw"
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="p-6">
-              <div className="mb-3 flex items-center gap-3 text-sm text-muted-foreground">
-                <Badge variant="secondary" className="capitalize">
-                  {selectedProject.category}
-                </Badge>
-                <span>Project spotlight</span>
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">{selectedProject.title}</h3>
-              <p className="mt-2 text-muted-foreground">{selectedProject.description}</p>
-              {selectedProject.materials && (
-                <p className="mt-4 text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Materials:</span> {selectedProject.materials}
-                </p>
-              )}
-            </div>
-            <Button
-              variant="outline"
-              className="absolute right-4 top-4 bg-background/90"
-              onClick={() => setSelectedProject(null)}
+            <m.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-background"
+              onClick={(event) => event.stopPropagation()}
             >
-              Close
-            </Button>
-          </motion.div>
-        </motion.div>
-      )}
+              <div className="relative aspect-[4/3] bg-muted">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 60vw, 100vw"
+                  className="object-cover"
+                  placeholder="blur"
+                  blurDataURL={blurDataURL}
+                  priority
+                />
+              </div>
+              <div className="p-6">
+                <div className="mb-3 flex items-center gap-3 text-sm text-muted-foreground">
+                  <Badge variant="secondary" className="capitalize">
+                    {selectedProject.category}
+                  </Badge>
+                  <span>Project spotlight</span>
+                </div>
+                <h3 className="text-2xl font-semibold text-foreground">{selectedProject.title}</h3>
+                <p className="mt-2 text-muted-foreground">{selectedProject.description}</p>
+                {selectedProject.materials && (
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Materials:</span> {selectedProject.materials}
+                  </p>
+                )}
+              </div>
+              <Button
+                variant="outline"
+                className="absolute right-4 top-4 bg-background/90"
+                onClick={() => setSelectedProject(null)}
+              >
+                Close
+              </Button>
+            </m.div>
+          </m.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

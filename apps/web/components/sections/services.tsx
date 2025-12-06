@@ -2,7 +2,7 @@
 
 import { Armchair, Palette, Wrench, Sparkles } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const services = [
   {
@@ -31,7 +31,7 @@ export function Services() {
   return (
     <section className="bg-muted/40 py-24">
       <div className="mx-auto w-full max-w-6xl px-4 md:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,13 +43,13 @@ export function Services() {
             Offering a comprehensive range of woodworking services tailored to bring your vision to
             life
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.div
+              <m.div
                 key={service.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export function Services() {
                     <CardDescription className="text-base">{service.description}</CardDescription>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
