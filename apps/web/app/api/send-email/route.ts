@@ -33,14 +33,15 @@ export async function POST(req: NextRequest) {
 
     // Initialize Resend with API key
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const recipientEmail = process.env.CONTACT_EMAIL_TO || 'Jklwoodcrafts@yahoo.co.uk';
-    console.log('[send-email] Sending email to:', recipientEmail);
+    // Trim whitespace/newlines from email to prevent validation errors
+    const recipientEmail = (process.env.CONTACT_EMAIL_TO || 'Jklwoodcrafts@yahoo.co.uk').trim();
+    console.log('[send-email] Sending email to:', JSON.stringify(recipientEmail));
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'JKL Woodcrafts <onboarding@resend.dev>',
       to: recipientEmail,
-      replyTo: validatedData.email,
+      replyTo: validatedData.email.trim(),
       subject: `New Project Inquiry from ${validatedData.name}`,
       react: ContactEmail(validatedData),
     });

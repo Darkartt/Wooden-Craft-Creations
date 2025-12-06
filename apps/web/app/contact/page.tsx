@@ -38,8 +38,11 @@ export default function ContactPage() {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        console.error('API error response:', result);
+        throw new Error(result.error || 'Failed to send message');
       }
 
       toast.success('Message sent successfully!', {
@@ -49,8 +52,11 @@ export default function ContactPage() {
       reset();
     } catch (error) {
       console.error('Error sending message:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       toast.error('Failed to send message', {
-        description: 'Please try again later or contact us directly via email.',
+        description: errorMessage.includes('not allowed')
+          ? 'Email service configuration issue. Please contact us directly at Jklwoodcrafts@yahoo.co.uk'
+          : 'Please try again later or contact us directly via email.',
       });
     } finally {
       setIsSubmitting(false);
