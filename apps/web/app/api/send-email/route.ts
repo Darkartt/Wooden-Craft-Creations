@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'JKL Woodcrafts <noreply@jklwoodcrafts.com>',
-      to: process.env.CONTACT_EMAIL_TO || 'kevswoodencreations@gmail.com',
+      from: 'JKL Woodcrafts <onboarding@resend.dev>',
+      to: process.env.CONTACT_EMAIL_TO || 'Jklwoodcrafts@yahoo.co.uk',
       replyTo: validatedData.email,
       subject: `New Project Inquiry from ${validatedData.name}`,
       react: ContactEmail(validatedData),
