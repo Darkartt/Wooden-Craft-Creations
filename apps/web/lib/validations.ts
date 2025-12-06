@@ -6,9 +6,14 @@ export const contactFormSchema = z.object({
   phone: z.string().optional(),
   projectType: z.string().optional(),
   budget: z.string().optional(),
-  preferredContact: z.enum(['email', 'phone'], {
-    required_error: 'Please select a preferred contact method',
-  }),
+  preferredContact: z
+    .string()
+    .optional()
+    .transform((val) => {
+      if (!val || val === '') return 'email';
+      if (val === 'email' || val === 'phone') return val;
+      return 'email';
+    }),
   message: z.string().min(50, 'Message must be at least 50 characters'),
 });
 
